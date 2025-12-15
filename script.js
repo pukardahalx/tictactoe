@@ -1,7 +1,7 @@
 let board = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let isGameActive = true;
-let gameMode = null;
+let gameMode = null; 
 
 const modeSelection = document.getElementById('mode-selection');
 const turnSelection = document.getElementById('turn-selection');
@@ -9,7 +9,6 @@ const gameArea = document.getElementById('game-area');
 const statusDisplay = document.getElementById('status');
 const cells = document.querySelectorAll('.cell');
 const restartButton = document.getElementById('restart-button');
-const backButton = document.getElementById('back-button');
 
 const HUMAN_PLAYER = 'X';
 const COMPUTER_PLAYER = 'O';
@@ -19,8 +18,6 @@ const winningConditions = [
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6]
 ];
-
-// --- UI STATE MANAGEMENT ---
 
 const setScreen = (screen) => {
     modeSelection.classList.add('hidden');
@@ -36,12 +33,10 @@ const setScreen = (screen) => {
     }
 };
 
-// --- GAME FLOW ---
-
 const initializeGame = (startingPlayer) => {
     board = ['', '', '', '', '', '', '', '', ''];
     isGameActive = true;
-    currentPlayer = startingPlayer;
+    currentPlayer = startingPlayer; 
     setScreen('game');
     
     cells.forEach(cell => {
@@ -81,6 +76,7 @@ const handleResultValidation = () => {
 };
 
 const changePlayer = () => {
+    
     currentPlayer = currentPlayer === HUMAN_PLAYER ? COMPUTER_PLAYER : HUMAN_PLAYER;
     statusDisplay.innerHTML = `Player ${currentPlayer}'s turn`;
 
@@ -89,14 +85,15 @@ const changePlayer = () => {
     }
 };
 
-// --- MOVE HANDLERS ---
-
 const makeMove = (index, player, currentBoard = board) => {
+    
     currentBoard[index] = player;
     
     if (currentBoard === board) { 
         const cellElement = cells[index];
         cellElement.innerHTML = player;
+        
+        
         cellElement.classList.add(player === HUMAN_PLAYER ? 'player-x' : 'player-o');
     }
     return currentBoard;
@@ -109,17 +106,15 @@ const handleCellClick = (e) => {
         return;
     }
 
-    makeMove(clickedCellIndex, HUMAN_PLAYER);
+    
+    makeMove(clickedCellIndex, currentPlayer); 
     handleResultValidation();
 };
-
-// --- MINIMAX ALGORITHM ---
 
 const emptySquares = (currentBoard) => {
     return currentBoard.map((val, index) => val === '' ? index : null).filter(val => val !== null);
 };
 
-// Scores for the terminal states
 const scores = {
     [COMPUTER_PLAYER]: 10,
     [HUMAN_PLAYER]: -10,
@@ -129,7 +124,6 @@ const scores = {
 const minimax = (newBoard, player) => {
     const availableSpots = emptySquares(newBoard);
 
-    // Check for terminal states (Win, Lose, or Tie)
     if (checkWin(newBoard, COMPUTER_PLAYER)) {
         return scores[COMPUTER_PLAYER];
     } else if (checkWin(newBoard, HUMAN_PLAYER)) {
@@ -140,12 +134,10 @@ const minimax = (newBoard, player) => {
 
     let moves = [];
     
-    // Iterate through all available spots
     for (let i = 0; i < availableSpots.length; i++) {
         let move = {};
         move.index = availableSpots[i];
         
-        // Make the move on a copy of the board
         let nextBoard = [...newBoard];
         nextBoard[availableSpots[i]] = player;
 
@@ -184,7 +176,6 @@ const minimax = (newBoard, player) => {
 const handleComputerMove = () => {
     if (!isGameActive || currentPlayer !== COMPUTER_PLAYER) return;
 
-    // The minimax function returns the index of the best move
     const bestSpot = minimax(board, COMPUTER_PLAYER);
     
     if (bestSpot !== undefined) {
@@ -192,8 +183,6 @@ const handleComputerMove = () => {
         handleResultValidation();
     }
 };
-
-// --- EVENT LISTENERS ---
 
 document.getElementById('mode-pvp').addEventListener('click', () => {
     gameMode = 'pvp';
@@ -221,7 +210,11 @@ restartButton.addEventListener('click', () => {
     }
 });
 
-backButton.addEventListener('click', () => {
+document.getElementById('back-button-turn').addEventListener('click', () => {
+    setScreen('mode');
+});
+
+document.getElementById('back-button-game').addEventListener('click', () => {
     setScreen('mode');
 });
 

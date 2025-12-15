@@ -10,19 +10,24 @@
     <div class="container">
         <h1>Tic Tac Toe</h1>
 
-        <div id="mode-selection">
-            <h2>Select Game Mode</h2>
-            <button id="mode-pvp" class="mode-button">Player Vs Player</button>
-            <button id="mode-pvc" class="mode-button">Player Vs Computer</button>
+        <div id="mode-selection" class="screen">
+            <h2>Choose Your Challenge</h2>
+            <div class="button-group">
+                <button id="mode-pvp" class="btn btn-primary">Player Vs Player</button>
+                <button id="mode-pvc" class="btn btn-secondary">Player Vs Computer</button>
+            </div>
         </div>
 
-        <div id="turn-selection" class="hidden">
+        <div id="turn-selection" class="screen hidden">
             <h2>Who Goes First?</h2>
-            <button id="turn-player" class="turn-button">I Go First (X)</button>
-            <button id="turn-computer" class="turn-button">Computer Goes First (O)</button>
+            <div class="button-group">
+                <button id="turn-player" class="btn btn-red">I Go First (X)</button>
+                <button id="turn-computer" class="btn btn-blue">Computer Goes First (O)</button>
+            </div>
+            <button id="back-button-turn" class="btn btn-dark-grey mt-2">Back to Mode Select</button>
         </div>
 
-        <div id="game-area" class="hidden">
+        <div id="game-area" class="screen hidden">
             <div id="status"></div>
             <div class="game-board" id="game-board">
                 <div class="cell" data-index="0"></div>
@@ -35,8 +40,10 @@
                 <div class="cell" data-index="7"></div>
                 <div class="cell" data-index="8"></div>
             </div>
-            <button id="restart-button">Restart Game</button>
-            <button id="back-button" class="back-button">Change Mode</button>
+            <div class="button-group">
+                <button id="restart-button" class="btn btn-orange">Restart Game</button>
+                <button id="back-button-game" class="btn btn-dark-grey">Change Mode</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

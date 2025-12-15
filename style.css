@@ -1,3 +1,14 @@
+:root {
+    --bg-color: #2c3e50; 
+    --card-bg: #34495e; 
+    --text-color: #ecf0f1;
+    --red-x: #e74c3c;
+    --blue-o: #3498db;
+    --orange-restart: #f39c12;
+    --primary-green: #2ecc71;
+    --secondary-teal: #1abc9c;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     display: flex;
@@ -5,20 +16,31 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    background-color: #e8eaf6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .container {
     text-align: center;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: var(--card-bg);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 450px;
 }
 
 h1 {
-    color: #3f51b5; 
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--text-color);
     margin-bottom: 20px;
+    font-size: 1.5em;
 }
 
 /* --- Game Board Styles --- */
@@ -26,79 +48,77 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    gap: 8px;
-    margin: 20px auto;
-    width: 316px; 
+    gap: 10px;
+    margin: 25px auto;
 }
 
 .cell {
-    background-color: #cfd8dc; 
+    background-color: #46627e; 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
+    font-size: 70px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+    border-radius: 8px;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 .cell:hover {
-    background-color: #b0bec5;
+    background-color: #5d7d9e;
+    transform: scale(1.02);
 }
 
 /* Player Colors */
 .player-x {
-    color: #f44336; 
+    color: var(--red-x);
 }
 
 .player-o {
-    color: #2196f3;
+    color: var(--blue-o);
 }
 
 #status {
-    margin-bottom: 15px;
-    font-size: 1.4em;
+    font-size: 1.6em;
     font-weight: bold;
-    min-height: 1.4em;
-    color: #455a64;
+    min-height: 1.6em;
+    color: var(--text-color);
 }
 
 /* --- Button Styles --- */
-button {
-    padding: 12px 25px;
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
     font-size: 1em;
     cursor: pointer;
     border: none;
     border-radius: 6px;
-    margin: 5px;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: opacity 0.2s, transform 0.1s;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-.mode-button, .turn-button {
-    background-color: #4caf50; 
-    color: white;
+.btn:hover {
+    opacity: 0.9;
 }
 
-.mode-button:hover, .turn-button:hover {
-    background-color: #388e3c;
-}
-
-#restart-button {
-    background-color: #ff9800; 
-    color: white;
-}
-
-#back-button {
-    background-color: #607d8b; 
-    color: white;
-}
-
-button:active {
+.btn:active {
     transform: scale(0.98);
 }
 
+/* Specific Button Colors */
+.btn-primary { background-color: var(--primary-green); color: white; }
+.btn-secondary { background-color: var(--secondary-teal); color: white; }
+.btn-red { background-color: var(--red-x); color: white; }
+.btn-blue { background-color: var(--blue-o); color: white; }
+.btn-orange { background-color: var(--orange-restart); color: white; }
+.btn-dark-grey { background-color: #7f8c8d; color: white; }
 
-.hidden {
-    display: none !important;
-}
+.mt-2 { margin-top: 10px; }
+.hidden { display: none !important; }
